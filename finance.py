@@ -11,7 +11,10 @@ class Finance(Randommer):
         Returns:
             list: list of types
         '''
-        pass
+        headers = {'X-Api-Key': api_key}
+        url = f'{self.base_url}Finance/CryptoAddress/Types'
+        response = requests.get(url, headers=headers)
+        return response.json()
 
     def get_crypto_address(self, crypto_type: str, api_key: str) -> dict:
         '''get available crypto address
@@ -23,7 +26,11 @@ class Finance(Randommer):
         Returns:
             dict: crypto address
         '''
-        pass
+        headers = {'X-Api-Key': api_key}
+        payload = {'cryptoType': crypto_type}
+        url = f'{self.base_url}Finance/CryptoAddress'
+        response = requests.get(url, headers=headers, params=payload)
+        return response.json()
 
     def get_countries(self, api_key: str) -> list:
         '''get available countries
@@ -34,7 +41,10 @@ class Finance(Randommer):
         Returns:
             list: crypto address
         '''
-        pass
+        headers = {'X-Api-Key': api_key}
+        url = f'{self.base_url}Finance/Countries'
+        response = requests.get(url, headers=headers)
+        return response.json()
 
     def get_iban_by_country_code(self, country_code: str, api_key: str) -> dict:
         '''get available countries
@@ -46,4 +56,14 @@ class Finance(Randommer):
         Returns:
             dict: idan data
         '''
-        pass
+        headers = {'X-Api-Key': api_key}
+        url = f'{self.base_url}Finance/Iban/{country_code}'
+        response = requests.get(url, headers=headers)
+        return response.json()
+
+apikey = '1342a09ae7384e94a5aa8f52febf9fa3'
+obj = Finance()
+print(obj.get_crypto_address_types(apikey))
+print(obj.get_crypto_address(crypto_type = '12', api_key = apikey))
+print(obj.get_countries(apikey))
+print(obj.get_iban_by_country_code('DE', apikey))
