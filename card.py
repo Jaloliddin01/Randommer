@@ -13,6 +13,7 @@ class Card(Randommer):
         Returns:
             dict: card data
         '''
+        'nimadir'
         pass
 
     def get_card_types(self, api_key: str) -> list:
